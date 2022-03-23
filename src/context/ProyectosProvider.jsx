@@ -181,9 +181,39 @@ const ProyectosProvider = ({children}) => {
 
     const handleModalTarea = () => {
         setModalFormularioTarea(!modalFormularioTarea)
+        setTarea({})
     }
 
-    const submitTarea = async tarea => {
+    const editarTarea = async tarea => {
+          
+        try {
+            const token = localStorage.getItem('token')
+            if(!token) return 
+
+            const config = {
+                headers: {
+                    "Content-Type": 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const {data} = await clienteAxios.put(`/tareas/${tarea.id}`, tarea, config)
+            
+            
+            const proyectoActualizado = {...proyecto}
+            proyectoActualizado.tareas = proyectoActualizado.tareas.map(el => el._id === data._id ? data : el)
+            setProyecto(proyectoActualizado)
+            setAlerta({})
+            setModalFormularioTarea(false)
+
+           
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const crearTarea = async tarea => {
+          
         try {
             const token = localStorage.getItem('token')
             if(!token) return 
@@ -203,23 +233,24 @@ const ProyectosProvider = ({children}) => {
             setAlerta({})
             setModalFormularioTarea(false)
 
-            // setAlerta({
-            //     msg: data.msg,
-            //     error: false
-            // })
-
-            // setTimeout(() => {
-            //     setAlerta({})
-            //     navigate('/proyectos')
-            // }, 2000)
-
+           
         } catch (error) {
             console.log(error)
         }
     }
 
+    const submitTarea = async tarea => {
+        if(tarea?.id){
+            await editarTarea(tarea)
+        }
+        else{
+            await crearTarea(tarea)
+        }
+    }
+
     const handleModalEditarTarea = tarea =>{
-        console.log(tarea)
+        setTarea(tarea)
+        setModalFormularioTarea(true)
     }
 
     return (
@@ -236,13 +267,15 @@ const ProyectosProvider = ({children}) => {
             handleModalTarea,
             modalFormularioTarea,
             submitTarea,
-            handleModalEditarTarea
+            handleModalEditarTarea,
+            tarea
         }}
 
         >
             {children}
         </ProyectosContext.Provider>
     )
+
 }
 
 export {

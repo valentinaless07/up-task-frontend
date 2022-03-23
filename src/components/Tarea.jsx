@@ -16,7 +16,7 @@ const Tarea = ({tarea}) => {
             <p className='mb-1 text-sm text-gray-500 uppercase '>
             {descripcion}
             </p>    
-            <p className='mb-1 text-xl '>
+            <p className='mb-1 text-sm '>
             {formatearFecha(fechaEntrega)}
             </p>    
             <p className='mb-1 text-gray-600'>
@@ -27,7 +27,10 @@ const Tarea = ({tarea}) => {
         <div className='flex gap-2'>
         <button className='
             bg-indigo-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg
-            '>
+            '
+            onClick={() => handleModalEditarTarea(tarea)}
+            >
+            
                 Editar
             </button>
 
