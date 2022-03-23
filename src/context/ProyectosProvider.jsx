@@ -12,6 +12,7 @@ const ProyectosProvider = ({children}) => {
     const [alerta, setAlerta] = useState({})
     const [cargando, setCargando] = useState(false)
     const [modalFormularioTarea, setModalFormularioTarea] = useState(false)
+    const [tarea, setTarea] = useState({})
 
     useEffect(() => {
       
@@ -217,6 +218,10 @@ const ProyectosProvider = ({children}) => {
         }
     }
 
+    const handleModalEditarTarea = tarea =>{
+        console.log(tarea)
+    }
+
     return (
         <ProyectosContext.Provider
         value={{
@@ -230,7 +235,8 @@ const ProyectosProvider = ({children}) => {
             eliminarProyecto,
             handleModalTarea,
             modalFormularioTarea,
-            submitTarea
+            submitTarea,
+            handleModalEditarTarea
         }}
 
         >

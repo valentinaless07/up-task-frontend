@@ -1,9 +1,11 @@
 import React from 'react'
 import { formatearFecha } from '../helpers/formatearFecha'
+import useProyectos from '../hooks/useProyectos'
 
 const Tarea = ({tarea}) => {
 
     const {descripcion, nombre, prioridad, fechaEntrega, _id, estado} = tarea
+    const {handleModalEditarTarea} = useProyectos()
 
   return (
     <div className='border-b p-5 flex justify-between items-center'>
