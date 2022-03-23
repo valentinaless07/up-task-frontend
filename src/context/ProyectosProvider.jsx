@@ -196,7 +196,11 @@ const ProyectosProvider = ({children}) => {
 
             const {data} = await clienteAxios.post('/tareas', tarea, config)
             
-            
+            const proyectoActualizado = {...proyecto}
+            proyectoActualizado.tareas = [...proyecto.tareas, data]
+            setProyecto(proyectoActualizado)
+            setAlerta({})
+            setModalFormularioTarea(false)
 
             // setAlerta({
             //     msg: data.msg,
