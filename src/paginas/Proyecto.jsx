@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import Tarea from "../components/Tarea";
 import ModalFormularioTarea from "../components/ModalFormularioTarea";
 import useProyectos from "../hooks/useProyectos";
+import ModalEliminarTarea from "../components/ModalEliminarTarea";
+
 
 const Proyecto = () => {
   const params = useParams();
@@ -81,6 +83,7 @@ const Proyecto = () => {
       modal={modal}
       setModal={setModal}
       />
+      <ModalEliminarTarea/>
     </>
   );
 };
