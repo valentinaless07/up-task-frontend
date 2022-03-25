@@ -51,7 +51,7 @@ const Tarea = ({tarea}) => {
             }
 
 
-            <button onClick={handleModalEliminarTarea} className='
+            <button onClick={() => handleModalEliminarTarea(tarea)} className='
             bg-red-600 px-4 py-3 text-white uppercase font-bold text-sm rounded-lg
             '>
                 Eliminar

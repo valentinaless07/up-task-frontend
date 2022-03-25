@@ -249,18 +249,51 @@ const ProyectosProvider = ({children}) => {
         }
     }
 
-    const handleModalEditarTarea = tarea =>{
+    const handleModalEditarTarea = async tarea =>{
         setTarea(tarea)
         setModalFormularioTarea(true)
     }
 
-    const handleModalEliminarTarea = tarea => {
+    const handleModalEliminarTarea = async tarea => {
         setTarea(tarea)
         setModalEliminarTarea(!modalEliminarTarea)
     }
 
     const eliminarTarea = async () => {
-        
+        try {
+            const token = localStorage.getItem('token')
+            if(!token) return 
+
+            const config = {
+                headers: {
+                    "Content-Type": 'application/json',
+                    Authorization: `Bearer ${token}`
+                }
+            }
+
+            const {data} = await clienteAxios.delete(`/tareas/${tarea._id}`, config)
+            
+            setAlerta({
+                msg: data.msg,
+                error: false
+            })
+
+            const proyectoActualizado = {...proyecto}
+            proyectoActualizado.tareas = proyectoActualizado.tareas.filter(el=> el._id !== tarea._id)
+           setProyecto(proyectoActualizado)
+            setModalEliminarTarea(false)
+            setTarea({})
+            setTimeout(() => {
+                setAlerta({})
+            }, 3000)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const submitColaborador = async email => {
+        console.log(email)
     }
 
     return (
@@ -281,7 +314,8 @@ const ProyectosProvider = ({children}) => {
             tarea,
             handleModalEliminarTarea,
             modalEliminarTarea,
-            eliminarTarea
+            eliminarTarea,
+            submitColaborador
         }}
         
         >
