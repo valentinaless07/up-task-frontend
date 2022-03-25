@@ -259,6 +259,10 @@ const ProyectosProvider = ({children}) => {
         setModalEliminarTarea(!modalEliminarTarea)
     }
 
+    const eliminarTarea = async () => {
+        
+    }
+
     return (
         <ProyectosContext.Provider
         value={{
@@ -276,7 +280,8 @@ const ProyectosProvider = ({children}) => {
             handleModalEditarTarea,
             tarea,
             handleModalEliminarTarea,
-            modalEliminarTarea
+            modalEliminarTarea,
+            eliminarTarea
         }}
         
         >
