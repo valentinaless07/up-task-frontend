@@ -337,10 +337,23 @@ const ProyectosProvider = ({children}) => {
                 }
             }
 
-            const {data} = await clienteAxios.post(`/proyectos/colaboradores/${proyecto._id}`, {email}, config) 
-            console.log(data)
+            const {data} = await clienteAxios.post(`/proyectos/colaboradores/${proyecto._id}`, email, config) 
+
+            setAlerta({
+                msg: data.msg,
+                error: false
+            })
+
+            setTimeout(() => {
+                setColaborador({})
+                setAlerta({})
+            }, 3000)
+            
         } catch (error) {
-            console.log(error)
+           setAlerta({
+               msg: error.response.data.msg,
+               error: true
+           })
         }
     }
 
