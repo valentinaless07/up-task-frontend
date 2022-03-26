@@ -5,6 +5,8 @@ import ModalFormularioTarea from "../components/ModalFormularioTarea";
 import useProyectos from "../hooks/useProyectos";
 import ModalEliminarTarea from "../components/ModalEliminarTarea";
 import Alerta from "../components/Alerta";
+import Colaborador from "../components/Colaborador";
+import ModalEliminarColaborador from "../components/ModalEliminarColaborador";
 
 const Proyecto = () => {
   const params = useParams();
@@ -18,6 +20,7 @@ const Proyecto = () => {
   const { nombre } = proyecto;
 
   const {msg} = alerta
+
 
   return cargando ? (
     "Cargando..."
@@ -85,12 +88,24 @@ const Proyecto = () => {
         <p className="text-center my-5 p-10">No hay tareas en este Proyecto</p>}
       </div>
 
+      
+
       <div className="flex items-center justify-between mt-10"> 
         <p className="font-bold text-xl">Colaboradores</p>
         <Link to={`/proyectos/nuevo-colaborador/${proyecto._id}`} className='text-gray-400 uppercase font-bold 
         hover:text-black
         '>Añadir</Link>
       </div>    
+
+      <div className="bg-white shadow mt-10 rounded-lg">
+        {proyecto.colaboradores?.length ? proyecto.colaboradores?.map( el => (
+          <Colaborador
+          key={el._id}
+          colaborador={el}
+          />
+        )): 
+        <p className="text-center my-5 p-10">No hay colaboradores en este Proyecto</p>}
+      </div>
       
 
       <ModalFormularioTarea
@@ -98,6 +113,7 @@ const Proyecto = () => {
       setModal={setModal}
       />
       <ModalEliminarTarea/>
+      <ModalEliminarColaborador/>
     </>
   );
 };
