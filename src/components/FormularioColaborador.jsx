@@ -21,7 +21,7 @@ const FormularioColaborador = () => {
   const {msg} = alerta
 
   return (
-    <form className="bg-white py-10 px-5 md:w-2/2 xl:w-1/2 rounded-lg shadow " onSubmit={handleSubmit}>
+    <form className="bg-white py-10 px-5 w-full  md:w-2/2 xl:w-1/2 rounded-lg shadow " onSubmit={handleSubmit}>
         {msg && <Alerta alerta={alerta}/>}
       <div className="mb-5">
         <label

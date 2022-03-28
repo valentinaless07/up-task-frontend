@@ -15,6 +15,8 @@ const Proyecto = () => {
     useProyectos();
   const [modal, setModal] = useState(false);
 
+  
+
   useEffect(() => {
     obtenerProyecto(params.id);
   }, []);
