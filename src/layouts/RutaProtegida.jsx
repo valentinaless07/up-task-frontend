@@ -10,7 +10,7 @@ const RutaProtegida = () => {
 if(cargando) return 'Cargando...'
   return (
     <>
-    {auth._id ? (
+    {auth?._id ? (
       <div className='bg-gray-100'>
         <Header/>
         <div className='md:flex md:min-h-screen'>
