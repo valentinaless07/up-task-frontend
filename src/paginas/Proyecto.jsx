@@ -14,7 +14,8 @@ let socket
 
 const Proyecto = () => {
   const params = useParams();
-  const { obtenerProyecto, proyecto, cargando, handleModalTarea, alerta, submitTareasProyecto } =
+  const { obtenerProyecto, proyecto, cargando, handleModalTarea, alerta, submitTareasProyecto, eliminarTareaProyecto,
+    actualizarTareaProyecto, completarTareaProyecto } =
     useProyectos();
   const [modal, setModal] = useState(false);
 
@@ -39,6 +40,24 @@ const Proyecto = () => {
         if(tareaNueva.proyecto === proyecto._id){
 
           submitTareasProyecto(tareaNueva)
+        }
+      })
+
+      socket.on('tarea eliminada', tareaEliminada => {
+        if(tareaEliminada.proyecto === proyecto._id){
+          eliminarTareaProyecto(tareaEliminada)
+        }
+      })
+
+      socket.on('tarea actualizada', tareaActualizada => {
+        if(tareaActualizada.proyecto._id === proyecto._id){
+          actualizarTareaProyecto(tareaActualizada)
+        }
+      })
+
+      socket.on('nuevo estado', tareaCompletada => {
+        if(tareaCompletada.proyecto._id === proyecto._id){
+          completarTareaProyecto(tareaCompletada)
         }
       })
 
