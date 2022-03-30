@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import clienteAxios from "../config/clienteAxios";
 import {useNavigate} from 'react-router-dom'
 import io from 'socket.io-client'
+import useAuth from '../hooks/useAuth'
 
 let socket
 const ProyectosContext = createContext()
@@ -9,6 +10,7 @@ const ProyectosContext = createContext()
 const ProyectosProvider = ({children}) => {
     
     const navigate = useNavigate()
+    const {auth} = useAuth()
     const [proyectos, setProyectos] = useState([])
     const [proyecto, setProyecto] = useState({})
     const [alerta, setAlerta] = useState({})
@@ -44,7 +46,7 @@ const ProyectosProvider = ({children}) => {
 
     obtenerProyectos()
       
-    }, [])
+    }, [auth])
 
 
     useEffect(() => {
@@ -484,6 +486,12 @@ const ProyectosProvider = ({children}) => {
 
     }
 
+    const cerrarSesionProyectos = () => {
+        setProyectos([])
+        setAlerta({})
+        setProyecto({})
+    }
+
     return (
         <ProyectosContext.Provider
         value={{
@@ -515,7 +523,8 @@ const ProyectosProvider = ({children}) => {
             submitTareasProyecto,
             eliminarTareaProyecto,
             actualizarTareaProyecto,
-            completarTareaProyecto
+            completarTareaProyecto,
+            cerrarSesionProyectos
         }}
         
         >
