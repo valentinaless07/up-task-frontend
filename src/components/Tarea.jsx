@@ -2,6 +2,7 @@ import React from "react";
 import { formatearFecha } from "../helpers/formatearFecha";
 import useAdmin from "../hooks/useAdmin";
 import useProyectos from "../hooks/useProyectos";
+import '../style/tarea.css'
 
 const Tarea = ({ tarea }) => {
   const { descripcion, nombre, prioridad, fechaEntrega, _id, estado } = tarea;
@@ -16,7 +17,7 @@ const Tarea = ({ tarea }) => {
         <p className="mb-1 text-sm text-gray-500 uppercase ">{descripcion}</p>
         <p className="mb-1 text-sm ">{formatearFecha(fechaEntrega)}</p>
         <p className="mb-1 text-gray-600">Prioridad: {prioridad}</p>
-        {estado && tarea?.completado?.nombre && <p className="text-sm bg-green-600 uppercase p-2 rounded-lg text-white">Completada por:  {tarea.completado.nombre}</p>}
+        {estado && tarea?.completado?.nombre && <p id="p_completed_by" className="text-xs md:text-md bg-green-600 uppercase p-2 rounded-lg text-white">Completada por:  {tarea.completado.nombre}</p>}
       </div>
 
       <div className="flex flex-col lg:flex-row gap-3">
