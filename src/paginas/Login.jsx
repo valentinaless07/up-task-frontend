@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Alerta from '../components/Alerta'
 import clienteAxios from '../config/clienteAxios'
@@ -11,9 +11,15 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [alerta, setAlerta] = useState({})
 
-    const {setAuth} = useAuth()
+    const {setAuth, auth} = useAuth()
 
     const navigate = useNavigate()
+
+
+    useEffect(() => {
+      auth?._id && navigate('/proyectos')
+    }, [auth])
+    
     
     const handleSubmit = async (e) => {
         e.preventDefault()
