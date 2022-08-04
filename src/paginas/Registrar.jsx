@@ -42,7 +42,7 @@ const Registrar = () => {
             
          const {data} = await clienteAxios.post('/usuarios', {nombre, email, password})
 
-         setAlerta({msg: data.msg, error: false})
+         setAlerta({msg: "Tu cuenta ha sido creada, inicia sesión para continuar", error: false})
          setNombre('')
          setEmail('')
          setPassword('')
